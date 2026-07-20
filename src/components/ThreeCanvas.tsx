@@ -74,7 +74,7 @@ export default function ThreeCanvas() {
   return (
     <div className="w-full h-full relative select-none">
       <Canvas
-        shadows
+        shadows={{ type: THREE.PCFShadowMap }}
         camera={{ position: [0, 0.8, 3.2], fov: 45 }}
         gl={{ 
           antialias: true, 

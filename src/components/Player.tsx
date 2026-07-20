@@ -1,4 +1,9 @@
-export default function Player({ pos, state }) {
+interface PlayerProps {
+  pos: { x: number; y: number };
+  state: string;
+}
+
+export default function Player({ pos, state }: PlayerProps) {
   return (
     <div 
       className={`player ${state === 'running' ? 'running' : ''} ${state === 'mining' ? 'mining' : ''}`} 

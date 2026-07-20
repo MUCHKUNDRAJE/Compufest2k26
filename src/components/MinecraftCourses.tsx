@@ -16,7 +16,7 @@ const GREEN = "#5da627";
 const GREEN_DARK = "#3f7a1a";
 const pixelFont = "'Press Start 2P', monospace";
 
-const DIFFICULTY_COLOR = {
+const DIFFICULTY_COLOR: Record<string, string> = {
   Easy: "#5da627",
   Medium: "#e0942c",
   "MAXIMUM THREAT": "#c23b3b",
@@ -135,7 +135,11 @@ const MISSIONS = [
   },
 ];
 
-function CategoryTag({ children }) {
+interface CategoryTagProps {
+  children: string;
+}
+
+function CategoryTag({ children }: CategoryTagProps) {
   return (
     <span
       style={{
@@ -154,8 +158,13 @@ function CategoryTag({ children }) {
   );
 }
 
-function Stat({ label, value }) {
-  const c = DIFFICULTY_COLOR[value];
+interface StatProps {
+  label: string;
+  value?: string;
+}
+
+function Stat({ label, value }: StatProps) {
+  const c = value ? DIFFICULTY_COLOR[value] : undefined;
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
       <span style={{ fontFamily: "monospace", fontSize: "9.5px", color: CREAM_DIM }}>{label}</span>
@@ -164,7 +173,11 @@ function Stat({ label, value }) {
   );
 }
 
-function MissionButton({ small }) {
+interface MissionButtonProps {
+  small?: boolean;
+}
+
+function MissionButton({ small }: MissionButtonProps) {
   const [down, setDown] = useState(false);
   return (
     <button
@@ -194,7 +207,26 @@ function MissionButton({ small }) {
   );
 }
 
-function MissionCell({ m }) {
+interface Mission {
+  area: string;
+  variant: string;
+  category: string;
+  title: string;
+  subtitle?: string;
+  description?: string;
+  icon: string;
+  fee?: string;
+  mode?: string;
+  difficulty: string;
+  agents?: string;
+  reward: string;
+}
+
+interface MissionCellProps {
+  m: Mission;
+}
+
+function MissionCell({ m }: MissionCellProps) {
   const base = {
     background: PANEL,
     border: `3px solid ${PANEL_BORDER}`,

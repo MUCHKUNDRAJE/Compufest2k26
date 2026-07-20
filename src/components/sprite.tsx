@@ -1,5 +1,23 @@
 import { useRef, useEffect, useState } from "react";
 
+interface SpriteSheetAnimatorProps {
+  src: string;
+  frameWidth: number;
+  frameHeight: number;
+  frameCount: number;
+  columns?: number;
+  fps?: number;
+  loop?: boolean;
+  playing?: boolean;
+  scale?: number;
+  onComplete?: () => void;
+  className?: string;
+  style?: React.CSSProperties;
+  paddingX?: number;
+  paddingY?: number;
+  frameOffsets?: { x: number; y: number }[];
+}
+
 export default function SpriteSheetAnimator({
   src,
   frameWidth,  // The base width of a frame cell (e.g., 64)
@@ -21,17 +39,17 @@ export default function SpriteSheetAnimator({
   // This handles the "nudge" needed to align the character's feet/center point.
   // frameOffsets[frame] = { x: -10, y: 5 }
   frameOffsets = [], 
-}) {
+}: SpriteSheetAnimatorProps) {
   const [frame, setFrame] = useState(0);
-  const rafRef = useRef(null);
-  const lastTimeRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
+  const lastTimeRef = useRef<number>(0);
   const cols = columns || frameCount;
 
   useEffect(() => {
     if (!playing) return;
     const frameDuration = 1000 / fps;
 
-    const tick = (time) => {
+    const tick = (time: number) => {
       if (!lastTimeRef.current) lastTimeRef.current = time;
       const elapsed = time - lastTimeRef.current;
 
@@ -51,7 +69,11 @@ export default function SpriteSheetAnimator({
     };
 
     rafRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafRef.current);
+    return () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
+    };
   }, [playing, fps, frameCount, loop, onComplete]);
 
   const row = Math.floor(frame / cols);

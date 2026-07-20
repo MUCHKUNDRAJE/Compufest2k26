@@ -1,12 +1,41 @@
 "use client"
 import { useEffect, useRef, useState } from 'react';
+import { RefObject } from 'react';
 import TimelineNode from './TimelineNode';
 import Player from './Player';
-import { events } from './Events';
-import Cubes from './Cubes'
 
-export default function Timeline({ events, onBlockHover, onBlockLeave, onBlockClick, onNodeIntersect, playerPos, playerState }) {
-  const timelineWrapRef = useRef(null);
+export interface TimelineEvent {
+  id: number;
+  title: string;
+  date: string;
+  xp: number;
+  blockType: string;
+  difficulty: string;
+  description: string;
+  prizePool: string;
+  imag: string;
+}
+
+interface TimelineProps {
+  events: TimelineEvent[];
+  onBlockHover: (pos: { x: number; y: number }, rect: DOMRect) => void;
+  onBlockLeave: () => void;
+  onBlockClick: (xp: number, rect: DOMRect) => void;
+  onNodeIntersect: (xp: number) => void;
+  playerPos: any;
+  playerState: string;
+}
+
+export default function Timeline({
+  events,
+  onBlockHover,
+  onBlockLeave,
+  onBlockClick,
+  onNodeIntersect,
+  playerPos,
+  playerState
+}: TimelineProps) {
+  const timelineWrapRef = useRef<HTMLElement | null>(null);
   const [chainFill, setChainFill] = useState(0);
 
   useEffect(() => {

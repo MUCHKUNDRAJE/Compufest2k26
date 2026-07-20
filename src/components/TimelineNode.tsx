@@ -1,6 +1,25 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, RefObject } from 'react';
+import { TimelineEvent } from './Timeline';
 
-export default function TimelineNode({ event, index, timelineWrapRef, onHover, onLeave, onClick, onIntersect }) {
+interface TimelineNodeProps {
+  event: TimelineEvent;
+  index: number;
+  timelineWrapRef: RefObject<HTMLElement | null>;
+  onHover: (pos: { x: number; y: number }, rect: DOMRect) => void;
+  onLeave: () => void;
+  onClick: (xp: number, rect: DOMRect) => void;
+  onIntersect: (xp: number) => void;
+}
+
+export default function TimelineNode({
+  event,
+  index,
+  timelineWrapRef,
+  onHover,
+  onLeave,
+  onClick,
+  onIntersect
+}: TimelineNodeProps) {
   const {
     title = '',
     date = '',
@@ -11,8 +30,8 @@ export default function TimelineNode({ event, index, timelineWrapRef, onHover, o
     xp = 0,
     imag=""
   } = event;
-  const nodeRef = useRef(null);
-  const blockRef = useRef(null);
+  const nodeRef = useRef<HTMLDivElement>(null);
+  const blockRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [activeHover, setActiveHover] = useState(false);
   const [visited, setVisited] = useState(false);
@@ -80,7 +99,7 @@ export default function TimelineNode({ event, index, timelineWrapRef, onHover, o
     }, 260);
   };
 
-  const handleRegisterClick = (e) => {
+  const handleRegisterClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (blockRef.current) {
       // You can implement particles logic for register btn here or in App via onClick

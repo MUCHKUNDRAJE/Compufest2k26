@@ -1,5 +1,4 @@
 "use client"
-import { div } from 'three/tsl';
 import Timeline from './Timeline';
 export default function UseTimeline() {
   // 1. Create dummy data
@@ -49,7 +48,7 @@ export default function UseTimeline() {
       imag:"https://i.pinimg.com/1200x/ed/fc/6d/edfc6d5a5b63db5690f417dee6b776e9.jpg",
     },
        { 
-      id: 4, 
+      id: 5, 
       title: 'Nether Portal Quest', 
       date: '2026-09-28',
       xp: 500,
@@ -59,7 +58,7 @@ export default function UseTimeline() {
       prizePool: '₹50,000',
       imag:"https://i.pinimg.com/1200x/e2/4a/ea/e24aea50864d60e225d6c2c8c12805a9.jpg",
     },   { 
-      id: 4, 
+      id: 6, 
       title: 'Nether Portal Quest', 
       date: '2026-09-28',
       xp: 500,
@@ -69,7 +68,7 @@ export default function UseTimeline() {
       prizePool: '₹50,000',
       imag:"https://i.pinimg.com/736x/5c/ea/00/5cea00ff21a77908e9ab46c526f0481b.jpg"
     },   { 
-      id: 4, 
+      id: 7, 
       title: 'Nether Portal Quest', 
       date: '2026-09-28',
       xp: 500,
@@ -82,10 +81,10 @@ export default function UseTimeline() {
   ];
 
   // 2. Define your handler functions
-  const handleHover = (pos, rect) => {};
+  const handleHover = (pos: { x: number; y: number }, rect: DOMRect) => {};
   const handleLeave = () => {};
-  const handleClick = (xp, rect) => {};
-  const handleIntersect = (xp) => {};
+  const handleClick = (xp: number, rect: DOMRect) => {};
+  const handleIntersect = (xp: number) => {};
 
   return (
     
@@ -124,7 +123,7 @@ export default function UseTimeline() {
         onBlockLeave={handleLeave}
         onBlockClick={handleClick}
         onNodeIntersect={handleIntersect}
-        playerPos={0}
+        playerPos={{ x: 0, y: 0 }}
         playerState="idle"
       />
     </section>
