@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect, useRef } from 'react';
- import PixelSnow from './PixelSnow';
+import PixelSnow from './PixelSnow';
 
 const HeroSection = ({ imageUrl = "/image.png" }) => {
   // Styles applied using the provided CSS variable
