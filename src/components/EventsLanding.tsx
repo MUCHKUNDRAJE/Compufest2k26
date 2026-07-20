@@ -4,6 +4,7 @@ import Portal from './portal';
 import SpriteSheetAnimator from './sprite';
 import MinecraftCourses from './MinecraftCourses';
 import BentoGrid from './MinecraftCourses';
+import RunningSteve from './RunningSteve';
 
 function EventLanding() {
   const playerOffsets = [
@@ -27,6 +28,7 @@ function EventLanding() {
       
       {/* Header / Video Section */}
       <div className='h-40 flex w-full relative'>
+          <RunningSteve />
         <div className='h-40 w-96'>
           <img src="./2.png" className="object-cover h-full w-full"></img>
         </div>
