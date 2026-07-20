@@ -87,8 +87,18 @@ export default function UseTimeline() {
   const handleIntersect = (xp: number) => {};
 
   return (
-    
-    <section style={{
+    <>
+      <div className="w-full h-12 bg-green-600 border-t-4 border-green-800 overflow-hidden flex items-end">
+       <div className="flex animate-slow-marquee whitespace-nowrap gap-4 px-4">
+         {[...Array(40)].map((_, i) => (
+           <div key={i} className="w-8 h-8 bg-green-500 mb-2 opacity-50 flex-shrink-0"></div>
+         ))}
+         {[...Array(40)].map((_, i) => (
+           <div key={`copy-${i}`} className="w-8 h-8 bg-green-500 mb-2 opacity-50 flex-shrink-0"></div>
+         ))}
+       </div>
+      </div>
+    <section className='relative' style={{
       width: '100%',
       background: 'linear-gradient(180deg, #0a1420 0%, #0d1f10 50%, #0a1420 100%)',
       padding: '80px 0 60px',
@@ -126,6 +136,26 @@ export default function UseTimeline() {
         playerPos={{ x: 0, y: 0 }}
         playerState="idle"
       />
+      
+      <div className="absolute bottom-0 w-full z-10 h-12 bg-green-600 border-t-4 border-green-800 overflow-hidden flex items-end">
+          <div className="flex animate-slow-marquee whitespace-nowrap gap-4 px-4">
+            {[...Array(40)].map((_, i) => (
+              <div
+                key={i}
+                className="w-8 h-8 bg-green-500 mb-2 opacity-50 flex-shrink-0"
+              ></div>
+            ))}
+            {/* Duplicate set for seamless looping */}
+            {[...Array(40)].map((_, i) => (
+              <div
+                key={`copy-${i}`}
+                className="w-8 h-8 bg-green-500 mb-2 opacity-50 flex-shrink-0"
+              ></div>
+            ))}
+          </div>
+        </div>
     </section>
+    </>
+    
   );
 }
