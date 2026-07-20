@@ -77,13 +77,13 @@ const HeroSection = ({ imageUrl = "/image.png" }) => {
     color="#ffffff"
     flakeSize={0.01}
     minFlakeSize={1.25}
-    pixelResolution={200}
+    pixelResolution={180}
     speed={1.25}
-    density={0.3}
+    density={0.22}
     direction={125}
     brightness={1}
     depthFade={8}
-    farPlane={20}
+    farPlane={14}
     gamma={0.4545}
     variant="square"
 />

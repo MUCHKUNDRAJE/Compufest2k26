@@ -110,7 +110,7 @@ void main() {
   vec3 timeAnim = timeSpeed * 0.1 * vec3(7.0, 8.0, 5.0);
 
   float t = 0.0;
-  for (int i = 0; i < 128; i++) {
+  for (int i = 0; i < 64; i++) {
     if (t >= uFarPlane) break;
     
     vec3 fpos = floor(pos);
@@ -190,13 +190,13 @@ export default function PixelSnow({
   color = '#ffffff',
   flakeSize = 0.01,
   minFlakeSize = 1.25,
-  pixelResolution = 200,
+  pixelResolution = 180,
   speed = 1.25,
   depthFade = 8,
-  farPlane = 20,
+  farPlane = 14,
   brightness = 1,
   gamma = 0.4545,
-  density = 0.3,
+  density = 0.22,
   variant = 'square',
   direction = 125,
   className = '',
@@ -270,7 +270,7 @@ export default function PixelSnow({
       depth: false
     });
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(1); // Lock to 1x — retina 2x quadruples GPU work in the ray-march shader
     renderer.setSize(container.offsetWidth, container.offsetHeight);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
@@ -305,16 +305,21 @@ export default function PixelSnow({
     window.addEventListener('resize', handleResize);
 
     const startTime = performance.now();
-    const animate = () => {
+    const TARGET_FPS = 30;
+    const FRAME_INTERVAL = 1000 / TARGET_FPS;
+    let lastFrameTime = 0;
+
+    const animate = (timestamp: number) => {
       animationRef.current = requestAnimationFrame(animate);
 
-      // Only render if visible
-      if (isVisibleRef.current) {
+      // Only render if visible AND enough time has passed (throttle to ~30fps)
+      if (isVisibleRef.current && timestamp - lastFrameTime >= FRAME_INTERVAL) {
+        lastFrameTime = timestamp;
         material.uniforms.uTime.value = (performance.now() - startTime) * 0.001;
         renderer.render(scene, camera);
       }
     };
-    animate();
+    animate(0);
 
     return () => {
       cancelAnimationFrame(animationRef.current);

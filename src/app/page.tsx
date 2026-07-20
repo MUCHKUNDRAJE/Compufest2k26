@@ -4,7 +4,6 @@ import EventLanding from '@/components/EventsLanding';
 import Footer from '@/components/footer';
 import Mario from '@/components/mario';
 import HeroSection from '@/components/MineCraft';
-import Past from '@/components/past';
 import Runner from '@/components/Runner';
 import Timeline from '@/components/Timeline';
 import UseTimeline from '@/components/useTimeline';
@@ -12,12 +11,11 @@ import UseTimeline from '@/components/useTimeline';
 export default function Home() {
   return (
     <main className="min-h-screen bg-zinc-950">
-  <HeroSection/>
-  <About/>
-  <EventLanding/>
-  <UseTimeline/>
-  <Past/>
-  <Footer/>
+      <HeroSection />
+      <About />
+      <EventLanding />
+      <UseTimeline />
+      <Footer />
     </main>
   );
 }
