@@ -38,6 +38,19 @@ export default function TimelineNode({
   const [cracking, setCracking] = useState(false);
   const [mined, setMined] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const stickerPool = [
+    '/stickers/chest.png',
+    '/stickers/dragon.png',
+    '/stickers/enderman_sticker.png',
+    '/stickers/ghast.png',
+    '/stickers/golem.png',
+    '/stickers/portal.png',
+    '/stickers/skeleton_sticker.png',
+    '/stickers/steve_sticker.png',
+    '/stickers/tnt.png',
+    '/stickers/totem.png'
+  ];
+  const stickerSrc = stickerPool[index % stickerPool.length];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -112,6 +125,13 @@ export default function TimelineNode({
       className={`timeline-node ${index % 2 === 0 ? 'side-left' : 'side-right'} ${inView ? 'in-view' : ''} ${activeHover ? 'active-hover' : ''} ${expanded ? 'expanded' : ''}`}
       ref={nodeRef}
     >
+      <div
+        className={`timeline-sticker ${inView ? 'is-visible' : ''} ${index % 2 === 0 ? 'sticker-left' : 'sticker-right'}`}
+        aria-hidden="true"
+      >
+        <img src={stickerSrc} alt="" loading="lazy" />
+      </div>
+
       <div 
         className={`node-block ${cracking ? 'cracking' : ''} ${mined ? 'mined' : ''}`}
         ref={blockRef}
