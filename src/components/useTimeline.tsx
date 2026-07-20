@@ -104,7 +104,6 @@ export default function UseTimeline() {
       padding: '80px 0 60px',
       borderTop: '4px solid #166534',
       borderBottom: '4px solid #166534',
-      
     }}>
       {/* Section Header */}
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
