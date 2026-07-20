@@ -1,9 +1,20 @@
+"use client"
 import React from 'react';
 import Portal from './portal';
+import SpriteSheetAnimator from './sprite';
 
 function Runner() {
+  const playerOffsets = [
+  { x: -7, y: 0 },   // Frame 1
+  { x: 10, y: 0 },  // Frame 2 (adjust these numbers until it looks centered)
+  { x: 0, y: 0 }, 
+  { x: 0, y: 0 }, // Frame 3
+  { x: 0, y: 0 },
+   { x: 0, y: 0 }
+  // ... add an entry for every frame
+];
   return (
-    <div className='w-full bg-white'>
+    <div className='w-full '>
       <style>{`
         @keyframes marquee {
           from { transform: translateX(0); }
@@ -13,11 +24,7 @@ function Runner() {
       `}</style>
       
       {/* Header / Video Section */}
-      <div className='h-40 w-full'>
-        <div className='h-40 w-72'>
-          <video src="./web.mp4" autoPlay loop muted className="object-cover h-full w-full"></video>
-        </div>
-      </div>
+    
 
       {/* Marquee Section */}
       <div className="w-full h-12 bg-green-600 border-t-4 border-green-800 overflow-hidden flex items-end">

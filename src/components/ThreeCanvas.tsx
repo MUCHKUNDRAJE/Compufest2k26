@@ -53,8 +53,8 @@ function Model() {
   useFrame((state) => {
     if (groupRef.current) {
       // Calculate target rotation based on cursor position (-1 to 1 range)
-      const targetX = -state.pointer.y * 0.45; // Up/down tilt range (max ~25 degrees)
-      const targetY = state.pointer.x * 0.75;  // Left/right tilt range (max ~43 degrees)
+      const targetX = -state.pointer.y * 0.25; // Up/down tilt range (max ~25 degrees)
+      const targetY = state.pointer.x * 0.45;  // Left/right tilt range (max ~43 degrees)
       
       // Smoothly interpolate rotation to target value (damped easing)
       groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetX, 0.08);
@@ -65,7 +65,7 @@ function Model() {
   return (
     <group ref={groupRef}>
       {/* Base primitive mesh scaled up by 2.4 */}
-      <primitive object={scene} scale={2} />
+      <primitive object={scene} scale={1.6} />
     </group>
   );
 }
