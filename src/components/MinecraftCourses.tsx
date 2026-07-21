@@ -313,6 +313,7 @@ const GRID_CSS = `
   .bento {
     display: grid;
     gap: 16px;
+    padding: 0 16px;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, minmax(140px, auto));
     grid-template-areas:

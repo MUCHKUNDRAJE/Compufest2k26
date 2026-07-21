@@ -126,7 +126,7 @@ export default function TimelineNode({
       ref={nodeRef}
     >
       <div
-        className={`timeline-sticker hidden md:block ${inView ? 'is-visible' : ''} ${index % 2 === 0 ? 'sticker-left' : 'sticker-right'}`}
+        className={`timeline-sticker  hidden md:block ${inView ? 'is-visible' : ''} ${index % 2 === 0 ? 'sticker-left' : 'sticker-right'}`}
         aria-hidden="true"
       >
         <img src={stickerSrc} alt="" loading="lazy" />
@@ -143,7 +143,7 @@ export default function TimelineNode({
         <img
           src={event.imag}
           alt="event block"
-          className={`block-img border-2 rounded-2xl ${index % 2 == 0 ?"md:mt-35":"md:mt-0"}  `}
+          className={`block-img border-2 scale-70 mr-60 md:ml-0 md:scale-100 rounded-2xl ${index % 2 == 0 ?"md:mt-35":"md:mt-0"}  `}
           draggable={false}
         />
         <div className="block-glow-ring"></div>
