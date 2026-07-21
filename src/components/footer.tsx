@@ -24,7 +24,7 @@ function Footer() {
           <p className="font-['Minecraft'] text-sm tracking-widest text-[#a3a3a3]">
            Website Created By Muchkundraje thote and  Compufest Technical Team 
         </p>
-        <div className="flex gap-6 mt-4">
+        <div className=" gap-6 mt-4 hidden md:flex">
           <a href="#" className="hover:text-white font-['Minecraft'] text-xs">Home</a>
           <a href="#" className="hover:text-white font-['Minecraft'] text-xs">About</a>
           <a href="#" className="hover:text-white font-['Minecraft'] text-xs">Event</a>
