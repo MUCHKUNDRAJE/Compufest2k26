@@ -98,15 +98,19 @@ export default function UseTimeline() {
          ))}
        </div>
       </div>
-    <section className='relative' style={{
-      width: '100%',
-      background: 'linear-gradient(180deg, #0a1420 0%, #0d1f10 50%, #0a1420 100%)',
-      padding: '80px 0 60px',
-      borderTop: '4px solid #166534',
-      borderBottom: '4px solid #166534',
-    }}>
+<section className='relative bg-center bg-repeat' style={{
+  width: '100%',
+  background: "url(/forest.png)",
+  backgroundSize: 'cover',
+  padding: '80px 0 60px',
+  borderTop: '4px solid #166534',
+  borderBottom: '4px solid #166534',
+}}>
+    <div className='h-full w-full absolute z-1  top-0 bg-black opacity-30'>
+
+    </div>
       {/* Section Header */}
-      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+      <div className='relative z-10' style={{ textAlign: 'center', marginBottom: '20px' }}>
         <p style={{
           fontFamily: 'MineCraft, var(--font-press-start-2p), sans-serif',
           fontSize: '10px',
@@ -126,6 +130,7 @@ export default function UseTimeline() {
         <div style={{ width: '120px', height: '4px', background: '#15803d', margin: '16px auto 0', boxShadow: '0 0 10px #4ade80' }} />
       </div>
 
+
       <Timeline
         events={dummyEvents}
         onBlockHover={handleHover}
@@ -136,7 +141,7 @@ export default function UseTimeline() {
         playerState="idle"
       />
       
-      <div className="absolute bottom-0 w-full z-10 h-12 bg-green-600 border-t-4 border-green-800 overflow-hidden flex items-end">
+      <div  className="absolute bottom-0 w-full z-10 h-12 bg-green-600 border-t-4 border-green-800 overflow-hidden flex items-end">
           <div className="flex animate-slow-marquee whitespace-nowrap gap-4 px-4">
             {[...Array(40)].map((_, i) => (
               <div

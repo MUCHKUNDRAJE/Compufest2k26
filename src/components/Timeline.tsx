@@ -69,7 +69,7 @@ export default function Timeline({
   }, []);
 
   return (
-    <main className="timeline-wrap min-h-screen w-full " id="timelineWrap" ref={timelineWrapRef} >
+    <main  className="timeline-wrap min-h-screen w-full relative z-10" id="timelineWrap" ref={timelineWrapRef} >
       <div className="chain-line" id="chainLine">
         <div className="chain-line-fill" id="chainLineFill" style={{ height: `${chainFill}%` }}></div>
       </div>

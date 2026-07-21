@@ -126,7 +126,7 @@ export default function TimelineNode({
       ref={nodeRef}
     >
       <div
-        className={`timeline-sticker ${inView ? 'is-visible' : ''} ${index % 2 === 0 ? 'sticker-left' : 'sticker-right'}`}
+        className={`timeline-sticker hidden md:block ${inView ? 'is-visible' : ''} ${index % 2 === 0 ? 'sticker-left' : 'sticker-right'}`}
         aria-hidden="true"
       >
         <img src={stickerSrc} alt="" loading="lazy" />

@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="relative w-full h-40 bg-[#5b3922] border-t-8 border-[#3f5e27] mt-10">
+    <footer className="relative w-full h-40 bg-[#5b3922] border-t-8 border-[#3f5e27] ">
       {/* Grass Top Layer Pattern (Pixelated Look) */}
       <div className="absolute top-0 left-0 w-full h-4 bg-[#4a6b30]">
         {/* Decorative "Grass Blades" or pixel blocks */}

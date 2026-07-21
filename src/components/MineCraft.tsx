@@ -8,68 +8,12 @@ const HeroSection = ({ imageUrl = "/image.png" }) => {
   const minecraftShadow = "4px 4px 0px #000";
   const greenShadow = "7px 7px 0px black";
 
-  const [showNav, setShowNav] = useState(true);
-  const lastScrollY = useRef(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY < 50) {
-        // near top, always show
-        setShowNav(true);
-      } else if (currentScrollY > lastScrollY.current) {
-        // scrolling down
-        setShowNav(false);
-      } else {
-        // scrolling up
-        setShowNav(true);
-      }
-
-      lastScrollY.current = currentScrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <div className="min-h-screen bg-[#0a1420]" style={pixelFont}>
       {/* Navbar */}
-      <nav
-        className={`fixed w-full z-50 bg-[#0a1420]/90 backdrop-blur-sm border-b border-green-800 p-4 transition-transform duration-300 ${
-          showNav ? 'translate-y-0' : '-translate-y-full'
-        }`}
-      >
-         
-
-
-          
-          
-               <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-green-400 grid grid-cols-2 gap-0.5 p-1">
-              <div className="bg-[#0a1420]"></div><div className="bg-white"></div>
-              <div className="bg-white"></div><div className="bg-[#0a1420]"></div>
-            </div>
-            <div>
-              <h1 className="text-white text-[10px] font-bold">YCCE TECH CLUB</h1>
-            </div>
-          </div>
-
-          <div className="hidden md:flex gap-6 text-white text-[8px] uppercase items-center">
-            {['HOME', 'ABOUT', 'EVENTS', 'HIGHLIGHTS', 'SCHEDULE', 'CONTACT'].map((item) => (
-              <a key={item} href="#" className={`hover:text-green-400 ${item === 'HOME' ? 'border-b-2 border-green-400' : ''}`}>
-                {item}
-              </a>
-            ))}
-            <button className="bg-green-600 px-4 py-2 rounded-md hover:bg-green-500 transition-transform hover:scale-105 border-b-4 border-green-800">
-              REGISTER NOW →
-            </button>
-          </div>
-        </div>
-      </nav>
-
+  
       {/* Hero Content */}
 
       <div className=' absolute top-10 ' style={{ width: '100%', height: '600px',  }}>
