@@ -1,3 +1,4 @@
+"use client"
 import Runner from '@/components/Runner'
 import React from 'react'
 

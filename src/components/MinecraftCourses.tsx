@@ -6,6 +6,9 @@ import React, { useState } from "react";
  * else as compact cells — arranged with CSS grid-template-areas.
  * Two breakpoints collapse the named-area layout down to a simple
  * auto-fit grid (tablet) and a single column (mobile).
+ *
+ * Each card also carries a hanging corner tag marking it as a
+ * SPORTS or TECHNICAL event.
  */
 
 const CREAM = "#eee5c8";
@@ -22,11 +25,20 @@ const DIFFICULTY_COLOR: Record<string, string> = {
   "MAXIMUM THREAT": "#c23b3b",
 };
 
+// Colors for the two event groups. Sports reuses the green accent already
+// used for the CTA button; Technical gets its own violet so the two tags
+// never get confused with difficulty colors (green/amber/red) at a glance.
+const GROUP_STYLE: Record<string, { bg: string; border: string; icon: string }> = {
+  Sports: { bg: "#5da627", border: "#3f7a1a", icon: "🏆" },
+  Technical: { bg: "#7a4fa0", border: "#54366f", icon: "🖥" },
+};
+
 const MISSIONS = [
   {
     area: "cr",
     variant: "hero",
     category: "Hackathon",
+    group: "Technical",
     title: "CodeRush",
     subtitle: "24-Hour Hackathon",
     description:
@@ -42,6 +54,7 @@ const MISSIONS = [
     area: "bc",
     variant: "wide",
     category: "Competition",
+    group: "Sports",
     title: "Box Cricket",
     subtitle: "Turf Battle",
     description: "Short-format cricket matches packed with excitement and energy.",
@@ -56,6 +69,7 @@ const MISSIONS = [
     area: "aw",
     variant: "compact",
     category: "Competition",
+    group: "Sports",
     title: "Free Fire",
     subtitle: "Test your Strength",
     icon: "💪",
@@ -69,6 +83,7 @@ const MISSIONS = [
     area: "bg",
     variant: "compact",
     category: "Competition",
+    group: "Technical",
     title: "BGMI: BattleZone",
     subtitle: "Ultimate Survival",
     icon: "🎮",
@@ -82,7 +97,8 @@ const MISSIONS = [
     area: "vs",
     variant: "compact",
     category: "Competition",
-    title: "Versus Coding",
+    group: "Sports",
+    title: "Chess",
     subtitle: "Battle of the Coders",
     icon: "⚔️",
     fee: "₹150",
@@ -95,6 +111,7 @@ const MISSIONS = [
     area: "vi",
     variant: "compact",
     category: "Hackathon",
+    group: "Technical",
     title: "Vision Image-Net",
     subtitle: "AI & ML expertise",
     icon: "👁️",
@@ -104,12 +121,11 @@ const MISSIONS = [
     agents: "Team of 2",
     reward: "₹2,500",
   },
-
-
   {
     area: "pa",
     variant: "wide  ",
     category: "Hackathon",
+    group: "Technical",
     title: "Prompt-a-Thon",
     subtitle: "Master the Art of Prompt",
     icon: "🪄",
@@ -123,6 +139,7 @@ const MISSIONS = [
     area: "qz",
     variant: "compact",
     category: "Quiz",
+    group: "Technical",
     title: "Tech Quiz",
     subtitle: "Learn from the Best",
     description: "Industry professionals share real-world experiences and insights.",
@@ -132,6 +149,20 @@ const MISSIONS = [
     difficulty: "Easy",
     agents: "Team of 2-3",
     reward: "₹1500",
+  },
+  {
+    area: "vx",
+    variant: "compact",
+    category: "Competition",
+    group: "Technical",
+    title: "Versus Coding",
+    subtitle: "Battle of the Coders",
+    icon: "⚔️",
+    fee: "₹150",
+    mode: "Offline",
+    difficulty: "Medium",
+    agents: "Team of 2",
+    reward: "₹2000",
   },
 ];
 
@@ -155,6 +186,50 @@ function CategoryTag({ children }: CategoryTagProps) {
     >
       {children.toUpperCase()}
     </span>
+  );
+}
+
+interface GroupFrameProps {
+  group: string;
+}
+
+// Hanging corner tag — pinned to the top-left of the card, tilted
+// slightly like a hand-stamped quest marker, reading SPORTS or TECHNICAL.
+function GroupFrame({ group }: GroupFrameProps) {
+  const style = GROUP_STYLE[group];
+  if (!style) return null;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: "-13px",
+        left: "14px",
+        display: "flex",
+        alignItems: "center",
+        gap: "5px",
+        background: style.bg,
+        border: `3px solid ${style.border}`,
+        boxShadow: "0 0 0 3px #1c1208, 2px 3px 0 0 rgba(0,0,0,0.4)",
+        padding: "4px 8px",
+        transform: "rotate(-2deg)",
+        zIndex: 2,
+        pointerEvents: "none",
+      }}
+    >
+      <span style={{ fontSize: "11px", lineHeight: 1 }}>{style.icon}</span>
+      <span
+        style={{
+          fontFamily: pixelFont,
+          fontSize: "8px",
+          color: CREAM,
+          textShadow: "1px 1px 0 rgba(0,0,0,0.4)",
+          letterSpacing: "0.5px",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {group.toUpperCase()}
+      </span>
+    </div>
   );
 }
 
@@ -211,6 +286,7 @@ interface Mission {
   area: string;
   variant: string;
   category: string;
+  group: string;
   title: string;
   subtitle?: string;
   description?: string;
@@ -234,11 +310,14 @@ function MissionCell({ m }: MissionCellProps) {
     padding: "18px",
     display: "flex",
     gap: "12px",
+    position: "relative" as const,
+    overflow: "visible" as const,
   };
 
   if (m.variant === "hero") {
     return (
       <div className={`cell cell-${m.area}`} style={{ ...base, flexDirection: "column", justifyContent: "space-between" }}>
+        <GroupFrame group={m.group} />
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "10px" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             <CategoryTag>{m.category}</CategoryTag>
@@ -268,6 +347,7 @@ function MissionCell({ m }: MissionCellProps) {
   if (m.variant === "wide") {
     return (
       <div className={`cell cell-${m.area}`} style={{ ...base, flexDirection: "row", alignItems: "center", flexWrap: "wrap" }}>
+        <GroupFrame group={m.group} />
         <div style={{ fontSize: "34px", flexShrink: 0 }}>{m.icon}</div>
         <div style={{ flex: "1 1 160px", display: "flex", flexDirection: "column", gap: "4px" }}>
           <CategoryTag>{m.category}</CategoryTag>
@@ -292,6 +372,7 @@ function MissionCell({ m }: MissionCellProps) {
   // compact
   return (
     <div className={`cell cell-${m.area}`} style={{ ...base, flexDirection: "column", gap: "10px" }}>
+      <GroupFrame group={m.group} />
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         <CategoryTag>{m.category}</CategoryTag>
         <div style={{ fontSize: "26px" }}>{m.icon}</div>
@@ -313,13 +394,13 @@ const GRID_CSS = `
   .bento {
     display: grid;
     gap: 16px;
-    padding: 0 16px;
+    padding: 24px 16px 0;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, minmax(140px, auto));
     grid-template-areas:
       "cr cr cr bc bc bc"
       "cr cr cr aw bg vs"
-      "vi vi pa pa qz  qz"
+      "vi vi pa pa qz vx"
      
   }
   .cell-cr { grid-area: cr; }
@@ -375,8 +456,6 @@ export default function MissionBento() {
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         ${GRID_CSS}
       `}</style>
-
-     
 
       <div className="bento" style={{ maxWidth: "1300px", margin: "0 auto" }}>
         {MISSIONS.map((m) => (

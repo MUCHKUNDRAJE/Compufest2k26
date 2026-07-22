@@ -1,6 +1,5 @@
 "use client"
-import { useEffect, useRef, useState } from 'react';
-import { RefObject } from 'react';
+import { useEffect, useRef } from 'react';
 import TimelineNode from './TimelineNode';
 import Player from './Player';
 
@@ -36,18 +35,21 @@ export default function Timeline({
   playerState
 }: TimelineProps) {
   const timelineWrapRef = useRef<HTMLElement | null>(null);
-  const [chainFill, setChainFill] = useState(0);
+  const chainFillRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     let scrollTicking = false;
+
     const updateChainFill = () => {
-      if (!timelineWrapRef.current) return;
+      if (!timelineWrapRef.current || !chainFillRef.current) return;
       const rect = timelineWrapRef.current.getBoundingClientRect();
       const total = rect.height;
       const viewportCenter = window.innerHeight * 0.5;
       const progressPx = Math.min(Math.max(viewportCenter - rect.top, 0), total);
       const pct = total > 0 ? (progressPx / total) * 100 : 0;
-      setChainFill(pct);
+
+      // Direct DOM write — no setState, no re-render of the whole tree
+      chainFillRef.current.style.height = `${pct}%`;
       scrollTicking = false;
     };
 
@@ -69,17 +71,17 @@ export default function Timeline({
   }, []);
 
   return (
-    <main  className="timeline-wrap min-h-screen w-full relative z-10" id="timelineWrap" ref={timelineWrapRef} >
+    <main className="timeline-wrap min-h-screen w-full relative z-10" id="timelineWrap" ref={timelineWrapRef}>
       <div className="chain-line" id="chainLine">
-        <div className="chain-line-fill" id="chainLineFill" style={{ height: `${chainFill}%` }}></div>
+        <div className="chain-line-fill" id="chainLineFill" ref={chainFillRef} style={{ height: '0%' }}></div>
       </div>
 
       <Player pos={playerPos} state={playerState} />
 
       {events.map((ev, i) => (
-        <TimelineNode 
-          key={ev.id} 
-          event={ev} 
+        <TimelineNode
+          key={ev.id}
+          event={ev}
           index={i}
           timelineWrapRef={timelineWrapRef}
           onHover={onBlockHover}

@@ -17,11 +17,14 @@ function Footer() {
       </div>
 
       {/* Footer Content Area */}
-      <div className="flex flex-col items-center justify-center h-full pt-6 text-[#d1d5db]">
+      <div className="flex flex-col items-center justify-center h-full pt-2  text-[#d1d5db]">
+        <div className='h-12 w-12 scale-110 '>
+             <img className='h-full w-full object-cover' src="/logo.png" alt="" />
+        </div>
         <p className="font-['Minecraft'] text-sm tracking-widest text-[#a3a3a3]">
          Compufest 2K26
         </p>
-          <p className="font-['Minecraft'] text-sm tracking-widest text-[#a3a3a3]">
+          <p className="font-['Minecraft'] text-xs text-center tracking-widest text-[#a3a3a3]">
            Website Created By Muchkundraje thote and  Compufest Technical Team 
         </p>
         <div className=" gap-6 mt-4 hidden md:flex">

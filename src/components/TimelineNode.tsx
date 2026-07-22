@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, RefObject } from 'react';
+import { useEffect, useRef, useState, RefObject, memo } from 'react';
 import { TimelineEvent } from './Timeline';
 
 interface TimelineNodeProps {
@@ -11,7 +11,7 @@ interface TimelineNodeProps {
   onIntersect: (xp: number) => void;
 }
 
-export default function TimelineNode({
+function TimelineNode({
   event,
   index,
   timelineWrapRef,
@@ -28,7 +28,7 @@ export default function TimelineNode({
     prizePool = '',
     blockType = 'stone',
     xp = 0,
-    imag=""
+    imag = ""
   } = event;
   const nodeRef = useRef<HTMLDivElement>(null);
   const blockRef = useRef<HTMLDivElement>(null);
@@ -132,7 +132,7 @@ export default function TimelineNode({
         <img src={stickerSrc} alt="" loading="lazy" />
       </div>
 
-      <div 
+      <div
         className={`node-block ${cracking ? 'cracking' : ''} ${mined ? 'mined' : ''}`}
         ref={blockRef}
         onMouseEnter={handleMouseEnter}
@@ -143,7 +143,7 @@ export default function TimelineNode({
         <img
           src={event.imag}
           alt="event block"
-          className={`block-img border-2 scale-70 mr-60 md:ml-0 md:scale-100 rounded-2xl ${index % 2 == 0 ?"md:mt-35":"md:mt-0"}  `}
+          className={`block-img border-2 scale-70 mr-60 md:ml-0 md:scale-100 rounded-2xl ${index % 2 == 0 ? "md:mt-35" : "md:mt-0"}  `}
           draggable={false}
         />
         <div className="block-glow-ring"></div>
@@ -174,3 +174,5 @@ export default function TimelineNode({
     </section>
   );
 }
+
+export default memo(TimelineNode);

@@ -8,9 +8,9 @@ const NAV_ITEMS = [
   { label: 'HOME', href: '/' },
   { label: 'ABOUT', href: '#about' },
   { label: 'EVENTS', href: '/event' },
-  { label: 'HIGHLIGHTS', href: '#highlights' },
-  { label: 'SCHEDULE', href: '#schedule' },
-  { label: 'CONTACT', href: '#contact' },
+  { label: 'TIMELINE', href: '#highlights' },
+  { label: 'INSTAGRAM', href: '#schedule' },
+  { label: 'COMITTEE', href: '/comiittee' },
 ];
 
 function Nav() {
@@ -66,12 +66,11 @@ function Nav() {
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-green-400 grid grid-cols-2 gap-0.5 p-1">
-              <div className="bg-[#0a1420]"></div><div className="bg-white"></div>
-              <div className="bg-white"></div><div className="bg-[#0a1420]"></div>
-            </div>
+             <div className='h-12 w-12 scale-90 '>
+             <img className='h-full w-full object-cover' src="/logo.png" alt="" />
+        </div>
             <div>
-              <h1 className="text-white text-[10px] font-bold">YCCE TECH CLUB</h1>
+              <h1 className="text-white  text-[10px] font-bold">CT's Techfest</h1>
             </div>
           </div>
 

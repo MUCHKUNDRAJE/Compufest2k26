@@ -5,7 +5,7 @@ function About() {
   return (
     <div className='h-screen relative w-full overflow-hidden'>
       <img src="/about-bg.png" alt="" className='w-full h-full object-cover' />
-      <div className='h-screen w-full absolute top-0'>
+      <div className='h-screen w-full hidden md:block absolute top-0'>
         <ThreeCanvas />
       </div>
       <div
