@@ -40,7 +40,7 @@ const HeroSection = ({ imageUrl = "/image.png" }) => {
 
         <div className="relative z-10 flex flex-col items-center gap-6">
     <div className=' w-60 absolute top-14 scale-75 left-1/2 -translate-1/2'>
-   <img className='h-full w-full '  src="/Minechain.png" alt="" />
+   <img className='h-full w-full '  src="/minechain.png" alt="" />
     </div>
           <h1 className="text-5xl md:text-8xl mt-20 text-green-400" style={{ textShadow: greenShadow, fontFamily: "MineCraft" }}>
             COMPUFEST <br />
