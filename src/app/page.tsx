@@ -7,19 +7,21 @@ import HeroSection from '@/components/MineCraft';
 import Runner from '@/components/Runner';
 import Timeline from '@/components/Timeline';
 import UseTimeline from '@/components/useTimeline';
-import Past from "@/components/past"
-
+import Past from "@/components/past";
+import MinecraftLoader from '@/components/Minecraftloader';
 
 export default function Home() {
   return (
-    <main className="min-h-screen  bg-zinc-{#5B3922">
-      <HeroSection />
-      <About />
-      <EventLanding />
-      <UseTimeline />
-      <Past/>
-      {/* <Usematerial/> */}
-      <Footer />
-    </main>
+  
+      <main className="min-h-screen bg-zinc-900">
+        <HeroSection />
+        <About />
+        <EventLanding />
+        <UseTimeline />
+        <Past/>
+        {/* <Usematerial/> */}
+        <Footer />
+      </main>
+   
   );
 }

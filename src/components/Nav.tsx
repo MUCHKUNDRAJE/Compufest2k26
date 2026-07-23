@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { useRouter, usePathname } from 'next/navigation'
+
 const pixelFont = { fontFamily: 'var(--font-press-start-2p)' };
 
 const NAV_ITEMS = [
@@ -9,7 +11,7 @@ const NAV_ITEMS = [
   { label: 'ABOUT', href: '#about' },
   { label: 'EVENTS', href: '/event' },
   { label: 'TIMELINE', href: '#highlights' },
-  { label: 'INSTAGRAM', href: '#schedule' },
+  { label: 'INSTAGRAM', href: 'https://www.instagram.com/compufest_2k26?igsh=MTF6dDN4aTdlaGhlMw==' },
   { label: 'COMITTEE', href: '/comiittee' },
 ];
 
@@ -18,9 +20,26 @@ function Nav() {
   const [activeSection, setActiveSection] = useState('home');
   const [menuOpen, setMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // On any route other than "/", there's nothing to scroll-detect (the
+  // #about / #highlights sections only exist on the home page), so the
+  // active item should just reflect the route itself: "/event" -> "event",
+  // "/comiittee" -> "comiittee". This runs immediately on route change,
+  // instead of waiting for a scroll event that will never come on those pages.
+  useEffect(() => {
+    if (pathname !== '/') {
+      setActiveSection(pathname.slice(1));
+    } else {
+      setActiveSection('home');
+    }
+  }, [pathname]);
 
   useEffect(() => {
-    const handleScroll = () => {
+    if (pathname !== '/') return;
+
+    const detectSection = () => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY < 50) {
@@ -33,7 +52,16 @@ function Nav() {
 
       lastScrollY.current = currentScrollY;
 
-      const sections = NAV_ITEMS.map(item => item.href.slice(1));
+      // near the very top of the home page -> HOME is active
+      if (currentScrollY < 120) {
+        setActiveSection('home');
+        return;
+      }
+
+      const sections = NAV_ITEMS
+        .filter(item => item.href.startsWith('#'))
+        .map(item => item.href.slice(1));
+
       for (const id of sections) {
         const el = document.getElementById(id);
         if (el) {
@@ -46,15 +74,61 @@ function Nav() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    // run once immediately so the correct section is highlighted on load,
+    // not just after the first scroll event
+    detectSection();
+
+    window.addEventListener('scroll', detectSection, { passive: true });
+    return () => window.removeEventListener('scroll', detectSection);
+  }, [pathname]);
 
   // lock body scroll when the mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
+
+  // If we've just navigated to "/" from another route to reach a section,
+  // pick up the pending target from sessionStorage and scroll to it once
+  // the page has mounted. We never rely on a URL hash for this — Next's
+  // <Link> can double up an existing hash (e.g. "/#highlights#highlights"),
+  // so we handle the whole thing ourselves instead.
+  useEffect(() => {
+    if (pathname !== '/') return;
+    const id = sessionStorage.getItem('cf-scroll-target');
+    if (!id) return;
+    sessionStorage.removeItem('cf-scroll-target');
+    const timeout = setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, [pathname]);
+
+  // Section links keep a plain "/#id" href for accessibility/middle-click/
+  // right-click-open-in-new-tab, but every normal left click is intercepted
+  // and handled manually below so the browser/Next never touch the hash.
+  const getHref = (href: string) => (href.startsWith('#') ? `/${href}` : href);
+
+  const handleSectionClick = (e: React.MouseEvent, href: string) => {
+    if (!href.startsWith('#')) return;
+    e.preventDefault();
+    setMenuOpen(false);
+    const id = href.slice(1);
+
+    if (pathname !== '/') {
+      sessionStorage.setItem('cf-scroll-target', id);
+      router.push('/');
+      return;
+    }
+
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -79,10 +153,13 @@ function Nav() {
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.label}
-                href={item.href}
-                scroll={true}
+                href={getHref(item.href)}
+                scroll={!item.href.startsWith('#')}
+                onClick={(e) => handleSectionClick(e, item.href)}
                 className={`hover:text-green-400 transition-colors ${
-                  activeSection === item.href.slice(1) ? 'border-b-2 border-green-400 text-green-400' : ''
+                  activeSection === (item.href === '/' ? 'home' : item.href.slice(1))
+                    ? 'border-b-2 border-green-400 text-green-400'
+                    : ''
                 }`}
               >
                 {item.label}
@@ -136,11 +213,11 @@ function Nav() {
           {NAV_ITEMS.map((item) => (
             <Link
               key={item.label}
-              href={item.href}
-              scroll={true}
-              onClick={() => setMenuOpen(false)}
+              href={getHref(item.href)}
+              scroll={!item.href.startsWith('#')}
+              onClick={(e) => handleSectionClick(e, item.href)}
               className={`py-3 px-2 border-b border-green-900 hover:text-green-400 hover:bg-green-950/40 transition-colors ${
-                activeSection === item.href.slice(1) ? 'text-green-400' : ''
+                activeSection === (item.href === '/' ? 'home' : item.href.slice(1)) ? 'text-green-400' : ''
               }`}
             >
               {item.label}

@@ -78,6 +78,7 @@ export default function UseTimeline() {
       prizePool: '₹50,000',
       imag:'https://i.pinimg.com/1200x/3d/04/0c/3d040ce7a4e0af9e2e54e2ba57c2a544.jpg'
     },
+   
   ];
 
   // 2. Define your handler functions
@@ -88,7 +89,7 @@ export default function UseTimeline() {
 
   return (
     <>
-      <div className="w-full h-12 bg-green-600 border-t-4 border-green-800 overflow-hidden flex items-end">
+      <div id='highlights' className="w-full h-12 bg-green-600 border-t-4 border-green-800 overflow-hidden flex items-end">
        <div className="flex animate-slow-marquee whitespace-nowrap gap-4 px-4">
          {[...Array(40)].map((_, i) => (
            <div key={i} className="w-8 h-8 bg-green-500 mb-2 opacity-50 flex-shrink-0"></div>

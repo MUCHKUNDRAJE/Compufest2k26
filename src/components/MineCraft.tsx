@@ -38,7 +38,7 @@ const HeroSection = ({ imageUrl = "/image.png" }) => {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a1420] via-transparent to-[#0a1420]"></div>
         </div>
 
-        <div className="relative z-10 flex flex-col items-center gap-6">
+        <div className="relative z-10 flex  flex-col items-center gap-6">
     <div className=' w-60 absolute top-14 scale-75 left-1/2 -translate-1/2'>
    <img className='h-full w-full '  src="/minechain.png" alt="" />
     </div>
