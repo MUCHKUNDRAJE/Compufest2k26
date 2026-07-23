@@ -3,18 +3,18 @@ import ThreeCanvas from './ThreeCanvas'
 
 function About() {
   return (
-    <div id='about' className='h-screen relative w-full overflow-hidden'>
-      <img src="/about-bg.png" alt="" className='w-full h-full object-cover' />
-      <div className='h-screen w-full hidden md:block absolute top-0'>
+    <div id='about' className='h-screen md:h-[95vh] relative w-full overflow-hidden'>
+      <img src="/about-bg.png" alt="" className='w-full h-full  mt-2 object-cover' />
+      <div className='h-screen w-full hidden md:block absolute -top-17'>
         <ThreeCanvas />
       </div>
       <div
         className='h-screen w-full absolute top-0 pointer-events-none flex flex-col items-center gap-4 px-4 pt-6 overflow-y-auto md:block md:px-0 md:pt-0 md:mt-10 md:overflow-visible'
         style={{ fontFamily: 'MineCraft' }}
       >
-        <h1 className='text-center text-2xl md:text-4xl text-white'>About us</h1>
+        {/* <h1 className='text-center text-2xl md:text-4xl text-white'>About us</h1> */}
 
-        <div className='p-3 w-full max-w-xs h-auto md:h-90 md:w-90 bg-[#401D70] border-2 rounded-2xl bg-accent-foreground md:ml-20 md:mt-40'>
+        <div className='p-3 w-full max-w-xs h-auto md:h-90 md:w-90 bg-[#401D70] border-2 rounded-2xl bg-accent-foreground md:ml-20 md:mt-30'>
           <div>
             <p className='text-base md:text-xl text-white'>
               <span className='text-2xl md:text-3xl'> What is Compufest ?</span>
@@ -29,7 +29,9 @@ function About() {
             <p className='text-sm md:text-md text-white'>
               <span className='text-2xl md:text-3xl'> About CT Dpartment ?</span>
               <br />
+              <p>
               The Department of Computer Technology at YCCE, established in 1985, is accredited and recognized for excellence in education and research. With a focus on AI, IoT, ML, and more, it offers industry-relevant programs and advanced research opportunities.
+              </p>
             </p>
           </div>
         </div>
