@@ -30,16 +30,21 @@ function EventLanding() {
       <div className='h-40 flex w-full relative'>
         
         <div className='h-40 w-96'>
-          <img src="./2.png" className="object-cover h-full w-full"></img>
+          <img src="./1.png" className="object-cover h-full w-full"></img>
         </div>
+
          <div className='h-40 w-96 '>
-          <img src="./6.png" className="object-cover   h-full w-full"></img>
+          <img src="/4.png" className="object-cover   h-full w-full"></img>
         </div>
+         
+         <div className='h-40 w-96 '>
+          <img src="./2.png" className="object-cover   h-full w-full"></img>
+        </div>
+          
           <div className='h-40 w-96 '>
-          <img src="./4.png" className="object-cover   h-full w-full"></img>
-        </div>  <div className='h-40 w-96 '>
-          <img src="./5.png" className="object-cover   h-full w-full"></img>
-        </div>
+          <img src="./3.png" className="object-cover   h-full w-full"></img>
+        </div> 
+        
         
           {/* <SpriteSheetAnimator
             src="\spritesheet.png"
