@@ -44,11 +44,11 @@ const MISSIONS = [
     description:
       "50 Teams. 24 Hours. Dive into a full-day innovation sprint where ideas turn into impactful tech solutions. Build, debug, and deliver under pressure.",
     icon: "💻",
-    fee: "₹500",
+    fee: "₹2000",
     mode: "Offline",
     difficulty: "MAXIMUM THREAT",
     agents: "Team of 3-5",
-    reward: "₹30,000",
+    reward: "₹70,000",
   },
   {
     area: "bc",
@@ -83,7 +83,7 @@ const MISSIONS = [
     area: "bg",
     variant: "compact",
     category: "Competition",
-    group: "Technical",
+    group: "Sports",
     title: "BGMI: BattleZone",
     subtitle: "Ultimate Survival",
     icon: "🎮",
@@ -112,14 +112,14 @@ const MISSIONS = [
     variant: "compact",
     category: "Hackathon",
     group: "Technical",
-    title: "Vision Image-Net",
+    title: "Hack ML",
     subtitle: "AI & ML expertise",
     icon: "👁️",
     fee: "₹150",
     mode: "Offline",
     difficulty: "Medium",
     agents: "Team of 2",
-    reward: "₹2,500",
+    reward: "₹3000",
   },
   {
     area: "pa",
@@ -133,7 +133,7 @@ const MISSIONS = [
     mode: "Offline",
     difficulty: "Easy",
     agents: "Individual",
-    reward: "₹1500",
+    reward: "₹5000",
   },
   {
     area: "qz",
@@ -148,7 +148,7 @@ const MISSIONS = [
     mode: "Offline",
     difficulty: "Easy",
     agents: "Team of 2-3",
-    reward: "₹1500",
+    reward: "₹4500",
   },
   {
     area: "vx",
@@ -162,7 +162,7 @@ const MISSIONS = [
     mode: "Offline",
     difficulty: "Medium",
     agents: "Team of 2",
-    reward: "₹2000",
+    reward: "₹3500",
   },
 ];
 

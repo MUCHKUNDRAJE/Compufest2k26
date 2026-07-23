@@ -53,7 +53,7 @@ const HeroSection = ({ imageUrl = "/image.png" }) => {
 
           {/* Info Bar */}
           <div className="mt-8 flex flex-wrap justify-center gap-4 bg-[#0a1420]/80 border-2 border-green-500 p-4 rounded-lg text-[8px] text-white">
-            <span>📅 26TH - 28TH SEPT 2025</span>
+            <span>📅 6Th - 8TH AUG 2026</span>
             <span className="hidden md:block">|</span>
             <span>📍 YCCE, NAGPUR</span>
             <span className="hidden md:block">|</span>
