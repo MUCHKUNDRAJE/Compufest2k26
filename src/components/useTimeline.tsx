@@ -111,7 +111,7 @@ export default function UseTimeline() {
 
   return (
     <>
-      <div id='highlights' className="w-full h-12 bg-green-600 border-t-4 border-green-800 overflow-hidden flex items-end">
+
       <div id='highlights' className="w-full h-12 bg-green-600 border-t-4 border-green-800 overflow-hidden flex items-end">
        <div className="flex animate-slow-marquee whitespace-nowrap gap-4 px-4">
          {[...Array(40)].map((_, i) => (
